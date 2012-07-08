@@ -16,15 +16,17 @@ class ImageAnnotationPermissionsManager extends ImageAnnotationAbstractPermissio
      */
     protected function init() 
     {              
-        // set the display texts for each of the resources
+        
+	// set the display texts for each of the resources
         $this->setResourceTexts(array(
             'ImageAnnotation_Annotations' => 'Image Annotations'
         ));
         
         // set the display texts for each permission of each resource
+
         $this->setPermissionsTexts(array(
             'ImageAnnotation_Annotations' => array(
-                'add' => 'Add Their Own Annotations',
+                'add' =>  'Add Their Own Annotations',
                 'editSelf' => 'Edit Their Own Annotations',
                 'editAll' => 'Edit The Annotations Of Other Users',
                 'deleteSelf' => 'Delete Their Own Annotations',

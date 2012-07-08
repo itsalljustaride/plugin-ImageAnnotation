@@ -19,6 +19,7 @@ add_plugin_hook('define_acl','image_annotation_define_acl');
 add_plugin_hook('config_form', 'image_annotation_config_form');
 add_plugin_hook('config', 'image_annotation_config');
 add_plugin_hook('before_delete_item', 'image_annotation_before_delete_item');
+add_plugin_hook('initialize', 'image_annotation_initialize');
 add_filter('admin_navigation_main', 'image_annotation_admin_navigation');
 
 require_once(IMAGE_ANNOTATION_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'permissions-manager.php');
@@ -91,7 +92,7 @@ function image_annotation_admin_navigation($tabs)
 {
    if (has_permission('ImageAnnotation_Annotations', 'deleteSelf') ||
        has_permission('ImageAnnotation_Annotations', 'deleteAll')) {
-       $tabs['Image Annotations'] = uri('image-annotation/moderate');    
+       $tabs[__('Image Annotations')] = uri('image-annotation/moderate');    
    }
    return $tabs;
 }
@@ -203,7 +204,7 @@ function image_annotation_display_annotated_image($imageFile, $isEditable=false,
     $ajaxPath = CURRENT_BASE_URL . '/image-annotation/ajax/';
     $fileAnnotations = array( 
         'editable' => ($isEditable ? 'true': 'false'),
-        'addButtonText' => 'Add Annotation',
+        'addButtonText' => __('Add Annotation'),
         'addable' => ($isAddable ? 'true': 'false'),
         'imageId' => $imageId,
         'getUrl' => $ajaxPath . "get-annotation/file_id/" . $imageId . '/',  
@@ -280,4 +281,14 @@ function image_annotation_define_acl($acl)
 function image_annotation_sort_uri($sortByName)
 {
     return current_uri(array('sort' => $sortByName));
+}
+
+/** 
+ * Prepares plugin initialization.
+ * 
+ * @return void
+ */
+function image_annotation_initialize()
+{
+    add_translation_source(dirname(__FILE__) . '/languages');
 }

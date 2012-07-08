@@ -83,7 +83,7 @@ class ImageAnnotationAnnotationTable extends Omeka_Db_Table
         } else if ( is_int($file) ) {
             $fileId = $file;
         } else {
-            throw new Exception($file . ' is an invalid parameter. You must specify a file object or file object id to find an annotation by file.');
+            throw new Exception($file . __(' is an invalid parameter. You must specify a file object or file object id to find an annotation by file.'));
         }
                 
         $db = $this->getDb();
